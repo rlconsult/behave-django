@@ -1,8 +1,4 @@
-behave-django
-=============
-
 .. include:: ../README.rst
-   :start-after: .. intro-marker
    :end-before: .. support-marker
 
 Contents
@@ -13,16 +9,16 @@ Contents
 
    installation
    usage
+   contribute
 
 .. include:: ../README.rst
    :start-after: .. support-marker
-   :end-before: .. install-marker
+   :end-before: .. docs-marker
 
 .. include:: ../README.rst
-   :start-after: .. contribute-marker
+   :start-after: .. references-marker
 
 Indices and tables
-==================
+------------------
 
-* :ref:`genindex`
 * :ref:`search`
