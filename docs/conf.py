@@ -117,7 +117,7 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'github_user': 'mixxorz',
+    'github_user': 'behave',
     'github_repo': 'behave-django',
     'github_banner': 'true',
 }

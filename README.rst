@@ -1,8 +1,7 @@
-behave-django
-=============
-.. intro-marker
+behave-django |latest-version|
+==============================
 
-|Build Status| |Latest Version| |Downloads|
+|build-status| |health| |downloads| |license| |gitter|
 
 Behave BDD integration for Django
 
@@ -29,77 +28,42 @@ Specifically, our tests cover the latest patch version of:
 
 Django 1.4, 1.5, 1.6, 1.7, 1.8, 1.9 on Python 2.6, 2.7, 3.3, 3.4, 3.5.
 
-.. install-marker
-
-Installation
-------------
-
-Install using pip
-
-::
-
-    $ pip install behave-django
-
-Add ``behave_django`` to your ``INSTALLED_APPS``
-
-::
-
-    INSTALLED_APPS += ('behave_django',)
-
-Create the features directory in your project’s root directory. (Next to
-``manage.py``)
-
-::
-
-    features/
-        steps/
-            your_steps.py
-        environment.py
-        your-feature.feature
-
-Run ``python manage.py behave``
-
-::
-
-    $ python manage.py behave
-    Creating test database for alias 'default'...
-    Feature: Running tests # features/running-tests.feature:1
-      In order to prove that behave-django works
-      As the Maintainer
-      I want to test running behave against this features directory
-      Scenario: The Test                       # features/running-tests.feature:6
-        Given this step exists                 # features/steps/running_tests.py:4 0.000s
-        When I run "python manage.py behave"   # features/steps/running_tests.py:9 0.000s
-        Then I should see the behave tests run # features/steps/running_tests.py:14 0.000s
-
-    1 features passed, 0 failed, 0 skipped
-    1 scenarios passed, 0 failed, 0 skipped
-    3 steps passed, 0 failed, 0 skipped, 0 undefined
-    Took.010s
-    Destroying test database for alias 'default'...
-
 .. docs-marker
 
 Documentation
 -------------
 
 -  Documentation is available from `pythonhosted.org/behave-django`_
--  Read more about *behave* at `pythonhosted.org/behave`_
+-  Read more about ``behave`` at `pythonhosted.org/behave`_
 
 .. contribute-marker
 
 How to Contribute
 -----------------
 
-Please, read the `contributing guide`_.
+Please, read the `contributing guide`_ in the docs.
+
+.. references-marker
 
 
 .. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
 .. _pythonhosted.org/behave: http://pythonhosted.org/behave/
-.. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
-.. |Build Status| image:: https://img.shields.io/travis/mixxorz/behave-django/master.svg
-    :target: https://travis-ci.org/mixxorz/behave-django
-.. |Latest Version| image:: https://img.shields.io/pypi/v/behave-django.svg
+.. _contributing guide: https://pythonhosted.org/behave-django/contribute.html
+.. |latest-version| image:: https://img.shields.io/pypi/v/behave-django.svg
     :target: https://pypi.python.org/pypi/behave-django/
-.. |Downloads| image:: https://img.shields.io/pypi/dm/behave-django.svg
+    :alt: Latest version
+.. |build-status| image:: https://img.shields.io/travis/behave/behave-django/master.svg
+    :target: https://travis-ci.org/behave/behave-django
+    :alt: Build status
+.. |health| image:: https://landscape.io/github/behave/behave-django/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/behave/behave-django/master
+    :alt: Code health
+.. |downloads| image:: https://img.shields.io/pypi/dm/behave-django.svg
     :target: https://pypi.python.org/pypi/behave-django/
+    :alt: Monthly downloads
+.. |license| image:: https://img.shields.io/pypi/l/behave-django.svg
+    :target: https://github.com/behave/behave-django/blob/master/LICENSE
+    :alt: Software license
+.. |gitter| image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Gitter chat room
+   :target: https://gitter.im/behave/behave-django
