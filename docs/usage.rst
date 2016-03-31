@@ -73,7 +73,7 @@ testing client.
     # Using Django's testing client
     @when(u'I visit "{url}"')
     def visit(context, url):
-        response = context.test.client.get(url)
+        context.response = context.test.client.get(url) # save response in context for next step
 
 unittest + Django assert library
 --------------------------------
