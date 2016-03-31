@@ -33,34 +33,6 @@ Examples:
     # Get context.base_url + model_instance.get_absolute_url()
     context.get_url(model_instance)
 
-Database transactions per scenario
-----------------------------------
-
-Each scenario is run inside a database transaction, just like your
-regular TestCases.  So you can do something like:
-
-.. code:: python
-
-    @given(u'user "{username}" exists')
-    def create_user(context, username):
-        # This won't be here for the next scenario
-        User.objects.create_user(username=username, password-'correcthorsebatterystaple')
-
-And you don’t have to clean the database yourself.  :grinning:
-
-If you have `factories`_ you want to instantiate on a per-scenario basis,
-you can initialize them in ``environment.py`` like this:
-
-.. code:: python
-
-    from myapp.main.tests.factories import UserFactory, RandomContentFactory
-
-
-    def before_scenario(context, scenario):
-        UserFactory(username='user1')
-        UserFactory(username='user2')
-        RandomContentFactory()
-
 Django’s testing client
 -----------------------
 
@@ -87,53 +59,33 @@ Additionally, you can utilize unittest and Django’s assert library.
         response = context.response # from previous step
         context.test.assertContains(response, text)
 
-Command line options
---------------------
+Database transactions per scenario
+----------------------------------
 
-You can use regular behave command line options with the behave
-management command.
+Each scenario is run inside a database transaction, just like your
+regular TestCases.  So you can do something like:
 
-.. code:: bash
+.. code:: python
 
-    $ python manage.py behave --tags @wip
+    @given(u'user "{username}" exists')
+    def create_user(context, username):
+        # This won't be here for the next scenario
+        User.objects.create_user(username=username, password='correcthorsebatterystaple')
 
-Additional command line options provided by django_behave:
+And you don’t have to clean the database yourself.
 
-``--use-existing-database``
-***************************
+If you have `factories`_ you want to instantiate on a per-scenario basis,
+you can initialize them in ``environment.py`` like this:
 
-Don't create a test database, and use the database of your default runserver
-instead. USE AT YOUR OWN RISK! Only use this option for testing against a
-*copy* of your production database or other valuable data. Your tests may
-destroy your data irrecoverably.
+.. code:: python
 
-``--keepdb``
-************
+    from myapp.main.tests.factories import UserFactory, RandomContentFactory
 
-Starting with Django 1.8, the ``--keepdb`` flag was added to ``manage.py test``
-to facilitate faster testing by using the existing database instead of
-recreating it each time you run the test. This flag enables
-``manage.py behave --keepdb`` to take advantage of that feature.
-|keepdb docs|_.
 
-Behave configuration file
--------------------------
-
-You can use behave’s configuration file.  Just create a
-``behave.ini``/``.behaverc``/``setup.cfg`` file in your project’s root
-directory and behave will pick it up.  You can read more about it in the
-`behave docs`_.
-
-For example, if you want to have your features directory somewhere else.
-In your .behaverc file, you can put
-
-.. code:: ini
-
-    [behave]
-    paths=my_project/apps/accounts/features/
-          my_project/apps/polls/features/
-
-Behave should now look for your features in those folders.
+    def before_scenario(context, scenario):
+        UserFactory(username='user1')
+        UserFactory(username='user2')
+        RandomContentFactory()
 
 Fixture loading
 ---------------
@@ -172,15 +124,64 @@ Of course, since ``context.fixtures`` is really just a list, you can
 mutate it however you want, it will only be processed upon leaving the
 ``before_scenario()`` function of your ``environment.py`` file.
 
-**NOTE:** If you provide initial data via Python code `using the ORM`_ you
-need to place these calls in ``before_scenario()`` even if the data is meant
-to be used on the whole feature.  This is because Django's
-``LiveServerTestCase`` resets the test database after each scenario.
+.. note::
+
+    If you provide initial data via Python code `using the ORM`_ you need
+    to place these calls in ``before_scenario()`` even if the data is
+    meant to be used on the whole feature.  This is because Django's
+    ``LiveServerTestCase`` resets the test database after each scenario.
+
+Command line options
+--------------------
+
+You can use regular behave command line options with the behave
+management command.
+
+.. code:: bash
+
+    $ python manage.py behave --tags @wip
+
+Additional command line options provided by django_behave:
+
+``--use-existing-database``
+***************************
+
+Don't create a test database, and use the database of your default runserver
+instead. USE AT YOUR OWN RISK! Only use this option for testing against a
+*copy* of your production database or other valuable data. Your tests may
+destroy your data irrecoverably.
+
+``--keepdb``
+************
+
+Starting with Django 1.8, the ``--keepdb`` flag was added to ``manage.py test``
+to facilitate faster testing by using the existing database instead of
+recreating it each time you run the test. This flag enables
+``manage.py behave --keepdb`` to take advantage of that feature.
+|keepdb docs|_.
+
+Behave configuration file
+-------------------------
+
+You can use behave’s configuration file.  Just create a ``behave.ini``,
+``.behaverc``, or ``setup.cfg`` file in your project’s root directory and
+behave will pick it up.  You can read more about it in the `behave docs`_.
+
+For example, if you want to have your features directory somewhere else.
+In your .behaverc file, you can put
+
+.. code:: ini
+
+    [behave]
+    paths=my_project/apps/accounts/features/
+          my_project/apps/polls/features/
+
+Behave should now look for your features in those folders.
 
 
-.. _django.shortcuts.redirect: https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#redirect
+.. _django.shortcuts.redirect: https://docs.djangoproject.com/en/1.9/topics/http/shortcuts/#redirect
 .. _factories: https://factoryboy.readthedocs.org/en/latest/
 .. _behave docs: https://pythonhosted.org/behave/behave.html#configuration-files
 .. |keepdb docs| replace:: More information about ``--keepdb``
-.. _keepdb docs: http://docs.python.org/library/optparse.html
+.. _keepdb docs: https://docs.djangoproject.com/en/1.9/topics/testing/overview/#the-test-database
 .. _using the ORM: https://docs.djangoproject.com/en/1.9/topics/testing/tools/#fixture-loading
