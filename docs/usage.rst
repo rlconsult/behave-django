@@ -1,7 +1,7 @@
 Usage
 =====
 
-Web Browser Automation
+Web browser automation
 ----------------------
 
 You can access the test HTTP server from your preferred web automation
@@ -13,14 +13,14 @@ name, or a model as an argument, similar to `django.shortcuts.redirect`_.
 
 Examples:
 
-.. code:: python
+.. code-block:: python
 
     # Using Splinter
     @when(u'I visit "{url}"')
     def visit(context, url):
         context.browser.visit(context.base_url + url)
 
-.. code:: python
+.. code-block:: python
 
     # Get context.base_url
     context.get_url()
@@ -40,7 +40,7 @@ Attached to the context is an instance of TestCase.  You can access it
 via ``context.test``.  This means you can do things like use Django’s
 testing client.
 
-.. code:: python
+.. code-block:: python
 
     # Using Django's testing client
     @when(u'I visit "{url}"')
@@ -52,7 +52,7 @@ unittest + Django assert library
 
 Additionally, you can utilize unittest and Django’s assert library.
 
-.. code:: python
+.. code-block:: python
 
     @when(u'I should see "{text}"')
     def visit(context, text):
@@ -65,7 +65,7 @@ Database transactions per scenario
 Each scenario is run inside a database transaction, just like your
 regular TestCases.  So you can do something like:
 
-.. code:: python
+.. code-block:: python
 
     @given(u'user "{username}" exists')
     def create_user(context, username):
@@ -77,7 +77,7 @@ And you don’t have to clean the database yourself.
 If you have `factories`_ you want to instantiate on a per-scenario basis,
 you can initialize them in ``environment.py`` like this:
 
-.. code:: python
+.. code-block:: python
 
     from myapp.main.tests.factories import UserFactory, RandomContentFactory
 
@@ -93,7 +93,7 @@ Fixture loading
 behave-django can load your fixtures for you per feature/scenario.  In
 ``environment.py`` we can load our context with the fixtures array.
 
-.. code:: python
+.. code-block:: python
 
     def before_scenario(context, scenario):
         context.fixtures = ['user-data.json']
@@ -102,7 +102,7 @@ This fixture would then be loaded before every scenario.
 
 If you wanted different fixtures for different scenarios:
 
-.. code:: python
+.. code-block:: python
 
     def before_scenario(context, scenario):
         if scenario.name == 'User login with valid credentials':
@@ -112,7 +112,7 @@ If you wanted different fixtures for different scenarios:
 
 You could also have fixtures per Feature too
 
-.. code:: python
+.. code-block:: python
 
     def before_feature(context, feature):
         if feature.name == 'Login':
@@ -137,7 +137,7 @@ Command line options
 You can use regular behave command line options with the behave
 management command.
 
-.. code:: bash
+.. code-block:: bash
 
     $ python manage.py behave --tags @wip
 
@@ -170,7 +170,7 @@ behave will pick it up.  You can read more about it in the `behave docs`_.
 For example, if you want to have your features directory somewhere else.
 In your .behaverc file, you can put
 
-.. code:: ini
+.. code-block:: ini
 
     [behave]
     paths=my_project/apps/accounts/features/
