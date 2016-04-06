@@ -45,7 +45,8 @@ testing client.
     # Using Django's testing client
     @when(u'I visit "{url}"')
     def visit(context, url):
-        context.response = context.test.client.get(url) # save response in context for next step
+        # save response in context for next step
+        context.response = context.test.client.get(url)
 
 unittest + Django assert library
 --------------------------------
@@ -56,7 +57,8 @@ Additionally, you can utilize unittest and Django’s assert library.
 
     @when(u'I should see "{text}"')
     def visit(context, text):
-        response = context.response # from previous step
+        # from previous step
+        response = context.response
         context.test.assertContains(response, text)
 
 Database transactions per scenario
