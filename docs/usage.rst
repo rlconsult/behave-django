@@ -55,9 +55,9 @@ Additionally, you can utilize unittest and Django’s assert library.
 
 .. code-block:: python
 
-    @when(u'I should see "{text}"')
+    @then(u'I should see "{text}"')
     def visit(context, text):
-        # from previous step
+        # compare with response from ``when`` step
         response = context.response
         context.test.assertContains(response, text)
 
