@@ -1,7 +1,7 @@
 behave-django |latest-version|
 ==============================
 
-|build-status| |health| |downloads| |license| |gitter|
+|build-status| |health| |python-support| |downloads| |license| |gitter|
 
 Behave BDD integration for Django
 
@@ -58,6 +58,9 @@ Please, read the `contributing guide`_ in the docs.
 .. |health| image:: https://landscape.io/github/behave/behave-django/master/landscape.svg?style=flat
     :target: https://landscape.io/github/behave/behave-django/master
     :alt: Code health
+.. |python-support| image:: https://img.shields.io/pypi/pyversions/behave-django.svg
+   :target: https://pypi.python.org/pypi/behave-django
+   :alt: Python versions
 .. |downloads| image:: https://img.shields.io/pypi/dm/behave-django.svg
     :target: https://pypi.python.org/pypi/behave-django/
     :alt: Monthly downloads
