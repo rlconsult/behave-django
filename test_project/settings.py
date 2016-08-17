@@ -24,8 +24,6 @@ SECRET_KEY = '(&7)ub7ecukla=wzzb1h-u*x3l(93-=r*edcod@%)zn=v7u+@f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -49,7 +47,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-if django.get_version() >= '1.7':
+if django.VERSION >= (1, 7):
     MIDDLEWARE_CLASSES += (
         'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     )
@@ -58,6 +56,24 @@ MIDDLEWARE_CLASSES += (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+
+if django.VERSION < (1, 8):
+    TEMPLATE_DEBUG = DEBUG
+else:
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'debug': DEBUG,
+                'context_processors': [
+                    'django.contrib.auth.context_processors.auth',
+                ],
+            },
+        },
+    ]
 
 ROOT_URLCONF = 'test_project.urls'
 
