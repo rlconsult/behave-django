@@ -11,7 +11,9 @@ from behave_django.runner import (BehaviorDrivenTestRunner,
 
 
 def add_command_arguments(parser):
-    """Additional command line arguments for the behave management command"""
+    """
+    Additional command line arguments for the behave management command
+    """
     parser.add_argument(
         '--use-existing-database',
         action='store_true',
@@ -27,7 +29,9 @@ def add_command_arguments(parser):
 
 
 def add_behave_arguments(parser):
-    """Additional command line arguments extracted directly from behave"""
+    """
+    Additional command line arguments extracted directly from behave
+    """
 
     conflicts = [
         '--no-color',
@@ -62,7 +66,9 @@ class Command(BaseCommand):
     help = 'Runs behave tests'
 
     def add_arguments(self, parser):
-        """Add behave's and our command line arguments to the command"""
+        """
+        Add behave's and our command line arguments to the command
+        """
         add_command_arguments(parser)
         add_behave_arguments(parser)
 
