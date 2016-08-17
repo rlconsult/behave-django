@@ -25,10 +25,10 @@ setup(
     maintainer_email='mixxorz@gmail.com',
     install_requires=[
         'behave',
-        'Django>=1.4'
+        'Django>=1.8'
     ],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Environment :: Plugins',
         'Environment :: Web Environment',
@@ -38,7 +38,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',

@@ -2,14 +2,7 @@ import warnings
 
 from behave.runner import ModelRunner
 from django.core.management import call_command
-
-try:
-    from django.shortcuts import resolve_url
-except ImportError:
-    def resolve_url(to, *args, **kwargs):
-        """Support Django 1.4, which has no built-in resolve_url()"""
-        from django.shortcuts import redirect
-        return redirect(to, *args, **kwargs)['Location']
+from django.shortcuts import resolve_url
 
 
 class BehaveHooksMixin(object):

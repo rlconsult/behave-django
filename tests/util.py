@@ -14,9 +14,5 @@ class DjangoSetupMixin(object):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.settings'
 
     def run_management_command(self, command, *args, **kwargs):
-        try:
-            # required only since version 1.7
-            django.setup()
-        except AttributeError:
-            pass
+        django.setup()
         call_command(command, *args, **kwargs)

@@ -23,10 +23,15 @@ Features
 Support
 -------
 
-behave-django supports all current Django and Python versions.
-Specifically, our tests cover the latest patch version of:
+behave-django supports all newer Django versions and their supported Python
+versions.  Specifically, our tests cover Django >= 1.8 on Python 2.7, 3.3
+and above.
 
-Django 1.4, 1.5, 1.6, 1.7, 1.8, 1.9 on Python 2.6, 2.7, 3.3, 3.4, 3.5.
+Django versions 1.4 through 1.9 on Python 2.6 through 3.5 are supported
+until `version 0.3.0`_ of behave-django.  Please install that release for
+older versions of Django.  There is no technical disadvantage.
+
+The version of `behave`_ is independent from our integration.
 
 .. docs-marker
 
@@ -46,6 +51,8 @@ Please, read the `contributing guide`_ in the docs.
 .. references-marker
 
 
+.. _version 0.3.0: https://pypi.python.org/pypi/behave-django/0.3.0
+.. _behave: https://pypi.python.org/pypi/behave
 .. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
 .. _pythonhosted.org/behave: http://pythonhosted.org/behave/
 .. _contributing guide: https://pythonhosted.org/behave-django/contribute.html
@@ -67,6 +74,6 @@ Please, read the `contributing guide`_ in the docs.
 .. |license| image:: https://img.shields.io/pypi/l/behave-django.svg
     :target: https://github.com/behave/behave-django/blob/master/LICENSE
     :alt: Software license
-.. |gitter| image:: https://badges.gitter.im/Join%20Chat.svg
+.. |gitter| image:: https://badges.gitter.im/behave/behave-django.svg
    :alt: Gitter chat room
    :target: https://gitter.im/behave/behave-django

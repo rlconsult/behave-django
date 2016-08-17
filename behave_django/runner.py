@@ -1,7 +1,4 @@
-try:
-    from django.test.runner import DiscoverRunner
-except ImportError:
-    from django.test.simple import DjangoTestSuiteRunner as DiscoverRunner
+from django.test.runner import DiscoverRunner
 
 from behave_django.environment import BehaveHooksMixin
 from behave_django.testcase import (BehaviorDrivenTestCase,
