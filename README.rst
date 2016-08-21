@@ -30,8 +30,8 @@ versions.  Specifically, our tests cover Django 1.8 and above on Python 2.7,
 The version of `behave`_ is independent from our integration.
 
 **Older versions:** Django versions 1.4 through 1.9 on Python 2.6 through 3.5
-are supported until `version 0.3.0`_ of behave-django.  Please install that
-release for Django 1.7.x and below.  There is no technical disadvantage.
+are supported until `version 0.3.0`_ of ``behave-django``.  Please install
+that release for Django 1.7.x and below.  There is no technical disadvantage.
 
 .. docs-marker
 
@@ -39,7 +39,7 @@ Documentation
 -------------
 
 -  Documentation is available from `pythonhosted.org/behave-django`_
--  Read more about ``behave`` at `pythonhosted.org/behave`_
+-  Read more about ``behave`` at `behave.readthedocs.io`_
 
 .. contribute-marker
 
@@ -54,7 +54,7 @@ Please, read the `contributing guide`_ in the docs.
 .. _version 0.3.0: https://pypi.python.org/pypi/behave-django/0.3.0
 .. _behave: https://pypi.python.org/pypi/behave
 .. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
-.. _pythonhosted.org/behave: http://pythonhosted.org/behave/
+.. _behave.readthedocs.io: https://behave.readthedocs.io/en/latest/django.html
 .. _contributing guide: https://pythonhosted.org/behave-django/contribute.html
 .. |latest-version| image:: https://img.shields.io/pypi/v/behave-django.svg
     :target: https://pypi.python.org/pypi/behave-django/
