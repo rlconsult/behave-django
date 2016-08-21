@@ -1,12 +1,9 @@
-try:
-    from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-except ImportError:
-    from django.test import LiveServerTestCase as StaticLiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class BehaviorDrivenTestCase(StaticLiveServerTestCase):
-
-    """Test case attached to the context during behave execution
+    """
+    Test case attached to the context during behave execution
 
     This test case prevents the regular tests from running.
     """
@@ -16,8 +13,8 @@ class BehaviorDrivenTestCase(StaticLiveServerTestCase):
 
 
 class ExistingDatabaseTestCase(BehaviorDrivenTestCase):
-
-    """ Test case used for the --use-existing-database setup
+    """
+    Test case used for the --use-existing-database setup
 
     This test case prevents fixtures from being loaded to the database in use.
     """

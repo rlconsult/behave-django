@@ -1,27 +1,19 @@
-import warnings
-
 from behave.runner import ModelRunner
 from django.core.management import call_command
-
-try:
-    from django.shortcuts import resolve_url
-except ImportError:
-    def resolve_url(to, *args, **kwargs):
-        """Support Django 1.4, which has no built-in resolve_url()"""
-        from django.shortcuts import redirect
-        return redirect(to, *args, **kwargs)['Location']
+from django.shortcuts import resolve_url
 
 
 class BehaveHooksMixin(object):
-
-    """Provides methods that run during test execution
+    """
+    Provides methods that run during test execution
 
     These methods are attached to behave via monkey patching.
     """
     testcase_class = None
 
     def before_scenario(self, context):
-        """Method that runs before behave's before_scenario function
+        """
+        Method that runs before behave's before_scenario function
 
         Sets up the test case, base_url, and the get_url() utility function.
         """
@@ -38,7 +30,8 @@ class BehaveHooksMixin(object):
         context.get_url = get_url
 
     def load_fixtures(self, context):
-        """Method that runs immediately after behave's before_scenario function
+        """
+        Method that runs immediately after behave's before_scenario function
 
         If fixtures are found in context, loads the fixtures using the loaddata
         management command.
@@ -47,14 +40,17 @@ class BehaveHooksMixin(object):
             call_command('loaddata', *context.fixtures, verbosity=0)
 
     def after_scenario(self, context):
-        """Method that runs immediately after behave's after_scenario function
+        """
+        Method that runs immediately after behave's after_scenario function
         """
         context.test.tearDownClass()
         del context.test
 
 
 def monkey_patch_behave(django_test_runner):
-    """Integrate behave_django in behave via before/after scenario hooks."""
+    """
+    Integrate behave_django in behave via before/after scenario hooks
+    """
     behave_run_hook = ModelRunner.run_hook
 
     def run_hook(self, name, context, *args):
@@ -67,13 +63,3 @@ def monkey_patch_behave(django_test_runner):
             django_test_runner.after_scenario(context)
 
     ModelRunner.run_hook = run_hook
-
-
-def before_scenario(*args, **kwargs):
-    warnings.warn("DEPRECATED: This function is no longer needed.",
-                  stacklevel=2)
-
-
-def after_scenario(*args, **kwargs):
-    warnings.warn("DEPRECATED: This function is no longer needed.",
-                  stacklevel=2)
