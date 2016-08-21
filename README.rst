@@ -20,18 +20,18 @@ Features
 
 .. support-marker
 
-Support
--------
+Version Support
+---------------
 
 behave-django supports all newer Django versions and their supported Python
 versions.  Specifically, our tests cover Django >= 1.8 on Python 2.7, 3.3
 and above.
 
-Django versions 1.4 through 1.9 on Python 2.6 through 3.5 are supported
-until `version 0.3.0`_ of behave-django.  Please install that release for
-older versions of Django.  There is no technical disadvantage.
-
 The version of `behave`_ is independent from our integration.
+
+**Older versions:** Django versions 1.4 through 1.9 on Python 2.6 through 3.5
+are supported until `version 0.3.0`_ of behave-django.  Please install that
+release for older versions of Django.  There is no technical disadvantage.
 
 .. docs-marker
 
