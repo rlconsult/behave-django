@@ -1,6 +1,15 @@
 Release History
 ---------------
 
+0.4.0 (2016-08-23)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- Replace `optparse` with `argparse`
+- Support Django 1.8 + 1.9 + 1.10
+
+
 0.3.0 (2015-10-27)
 ++++++++++++++++++
 
