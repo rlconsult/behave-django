@@ -59,3 +59,4 @@ target/
 
 # added by GitSavvy
 /.python-version
+.ropeproject/
