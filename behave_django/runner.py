@@ -22,8 +22,8 @@ class ExistingDatabaseTestRunner(DiscoverRunner, BehaveHooksMixin):
     """
     testcase_class = ExistingDatabaseTestCase
 
-    def setup_databases(*args, **kwargs):
+    def setup_databases(self, **kwargs):
         pass
 
-    def teardown_databases(*args, **kwargs):
+    def teardown_databases(self, old_config, **kwargs):
         pass
