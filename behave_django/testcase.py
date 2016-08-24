@@ -8,7 +8,7 @@ class BehaviorDrivenTestCase(StaticLiveServerTestCase):
     This test case prevents the regular tests from running.
     """
 
-    def runTest(*args, **kwargs):
+    def runTest(self):
         pass
 
 
