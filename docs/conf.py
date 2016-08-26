@@ -117,11 +117,12 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
+    'fixed_sidebar': True,
     'github_user': 'behave',
     'github_repo': 'behave-django',
-    'github_banner': 'true',
+    'github_banner': True,
+    'show_related': True,
 }
-
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -275,8 +276,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   (master_doc, 'behave-django', u'behave-django Documentation',
-   author, 'behave-django', 'One line description of project.',
-   'Miscellaneous'),
+   author, 'behave-django', 'Behave BDD integration for Django.',
+   'Testing'),
 ]
 
 # Documents to append as an appendix to all manuals.
