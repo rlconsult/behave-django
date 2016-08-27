@@ -181,9 +181,9 @@ In your .behaverc file, you can put
 Behave should now look for your features in those folders.
 
 
-.. _django.shortcuts.redirect: https://docs.djangoproject.com/en/1.9/topics/http/shortcuts/#redirect
-.. _factories: https://factoryboy.readthedocs.org/en/latest/
-.. _behave docs: https://pythonhosted.org/behave/behave.html#configuration-files
+.. _django.shortcuts.redirect: https://docs.djangoproject.com/en/stable/topics/http/shortcuts/#redirect
+.. _factories: https://factoryboy.readthedocs.io/en/latest/
+.. _behave docs: https://behave.readthedocs.io/en/latest/behave.html#configuration-files
 .. |keepdb docs| replace:: More information about ``--keepdb``
-.. _keepdb docs: https://docs.djangoproject.com/en/1.9/topics/testing/overview/#the-test-database
-.. _using the ORM: https://docs.djangoproject.com/en/1.9/topics/testing/tools/#fixture-loading
+.. _keepdb docs: https://docs.djangoproject.com/en/stable/topics/testing/overview/#the-test-database
+.. _using the ORM: https://docs.djangoproject.com/en/stable/topics/testing/tools/#fixture-loading
