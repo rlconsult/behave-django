@@ -21,45 +21,63 @@ def add_command_arguments(parser):
         help="Don't create a test database. USE AT YOUR OWN RISK!",
     )
     parser.add_argument(
-        '--keepdb',
+        '-k', '--keepdb',
         action='store_true',
         default=False,
         help="Preserves the test DB between runs.",
     )
 
 
-def add_behave_arguments(parser):
+def add_behave_arguments(parser):  # noqa
     """
     Additional command line arguments extracted directly from behave
     """
 
+    # Option strings that conflict with Django
     conflicts = [
         '--no-color',
-        '--version'
+        '--version',
+        '-c',
+        '-k',
+        '-v'
     ]
 
-    for fixed, keywords in behave_options:
-        # TODO: accept short options too
-        keywords = keywords.copy()
-        long_option = None
-        for option in fixed:
-            if option.startswith("--"):
-                long_option = option
-                break
+    parser.add_argument(
+        'paths',
+        action='store',
+        nargs='*',
+        help="Feature directory, file or file location (FILE:LINE)."
+    )
 
-        # Do not add conflicting options
-        if long_option in conflicts:
+    for fixed, keywords in behave_options:
+        keywords = keywords.copy()
+
+        # Configfile only entries are ignored
+        if not fixed:
             continue
 
-        if long_option:
-            # type isn't a valid keyword for make_option
-            if hasattr(keywords.get('type'), '__call__'):
-                del keywords['type']
-            # config_help isn't a valid keyword for make_option
-            if 'config_help' in keywords:
-                del keywords['config_help']
+        # Build option strings, not including conflicting option strings
+        option_strings = []
+        for option in fixed:
+            if option in conflicts:
+                continue
 
-            parser.add_argument(long_option, **keywords)
+            option_strings.append(option)
+
+        # No use in adding an option if it doesn't have an option string
+        if len(option_strings) == 0:
+            continue
+
+        # type isn't a valid keyword for make_option
+        if hasattr(keywords.get('type'), '__call__'):
+            del keywords['type']
+
+        # config_help isn't a valid keyword for make_option
+        if 'config_help' in keywords:
+            keywords['help'] = keywords['config_help']
+            del keywords['config_help']
+
+        parser.add_argument(*option_strings, **keywords)
 
 
 class Command(BaseCommand):
@@ -69,6 +87,12 @@ class Command(BaseCommand):
         """
         Add behave's and our command line arguments to the command
         """
+        usage = "%(prog)s [options] [ [DIR|FILE|FILE:LINE] ]+"
+        description = """\
+        Run a number of feature tests with behave."""
+        parser.usage = usage
+        parser.description = description
+
         add_command_arguments(parser)
         add_behave_arguments(parser)
 

@@ -1,6 +1,18 @@
 Release History
 ---------------
 
+master
+++++++
+
+**Features and Improvements**
+
+* Behave's short form arguments are now accepted (e.g. :code:`-i` for :code:`--include`)
+* Added :code:`--keepdb` short form argument, `-k`
+
+**Bugfixes**
+* Fixed specifying paths didn't work
+
+
 0.4.0 (2016-08-23)
 ++++++++++++++++++
 
