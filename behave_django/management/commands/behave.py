@@ -39,7 +39,7 @@ def add_behave_arguments(parser):  # noqa
         '--version',
         '-c',
         '-k',
-        '-v'
+        '-v',
     ]
 
     parser.add_argument(
@@ -64,8 +64,8 @@ def add_behave_arguments(parser):  # noqa
 
             option_strings.append(option)
 
-        # No use in adding an option if it doesn't have an option string
-        if len(option_strings) == 0:
+        # Conflicting option strings are omitted
+        if not option_strings:
             continue
 
         # type isn't a valid keyword for make_option
