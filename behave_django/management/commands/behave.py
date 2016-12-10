@@ -56,17 +56,17 @@ def add_behave_arguments(parser):  # noqa
         if not fixed:
             continue
 
-        # Build option strings, not including conflicting option strings
+        # Build option strings
+        # Conflicting option strings get prefixed with `--behave`
         option_strings = []
         for option in fixed:
             if option in conflicts:
-                continue
+                if option.startswith('--'):
+                    option = '--behave-' + option[2:]
+                else:
+                    option = '--behave-' + option[1:]
 
             option_strings.append(option)
-
-        # Conflicting option strings are omitted
-        if not option_strings:
-            continue
 
         # type isn't a valid keyword for make_option
         if hasattr(keywords.get('type'), '__call__'):
@@ -130,7 +130,20 @@ class Command(BaseCommand):
         """
         parser = BehaveArgsHelper().create_parser('manage.py', 'behave')
         args, unknown = parser.parse_known_args(argv[2:])
-        return unknown
+
+        behave_args = []
+        for option in unknown:
+            if '--behave' in option:
+                if len(option) == len('--behave-x'):
+                    # Strip behave prefix from short options
+                    behave_args.append(option.replace('--behave', ''))
+                else:
+                    # Strip behave prefix from long options
+                    behave_args.append(option.replace('behave-', ''))
+            else:
+                behave_args.append(option)
+
+        return behave_args
 
 
 class BehaveArgsHelper(Command):

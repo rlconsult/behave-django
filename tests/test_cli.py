@@ -91,3 +91,11 @@ class TestCommandLine(DjangoSetupMixin):
         reload(behave_django.management.commands.behave)
 
         assert behave.configuration.options == behave_options_backup
+
+    def test_conflicting_options_should_get_prefixed(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave', '--behave-k', '--behave-version'])
+
+        assert args == ['-k', '--version']
