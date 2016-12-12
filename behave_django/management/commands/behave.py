@@ -62,7 +62,7 @@ def add_behave_arguments(parser):  # noqa
             # Prefix conflicting option strings with `--behave`
             if option in conflicts:
                 prefix = '--' if option.startswith('--') else '-'
-                option = option.replace(prefix, '--behave-', maxreplace=1)
+                option = option.replace(prefix, '--behave-', 1)
 
             option_strings.append(option)
 
