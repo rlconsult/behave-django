@@ -57,22 +57,16 @@ def add_behave_arguments(parser):  # noqa
             continue
 
         # Build option strings
-        # Conflicting option strings get prefixed with `--behave`
         option_strings = []
         for option in fixed:
+            # Prefix conflicting option strings with `--behave`
             if option in conflicts:
-                if option.startswith('--'):
-                    option = '--behave-' + option[2:]
-                else:
-                    option = '--behave-' + option[1:]
+                prefix = '--' if option.startswith('--') else '-'
+                option = option.replace(prefix, '--behave-', maxreplace=1)
 
             option_strings.append(option)
 
-        # type isn't a valid keyword for make_option
-        if hasattr(keywords.get('type'), '__call__'):
-            del keywords['type']
-
-        # config_help isn't a valid keyword for make_option
+        # config_help isn't a valid keyword for add_argument
         if 'config_help' in keywords:
             keywords['help'] = keywords['config_help']
             del keywords['config_help']
@@ -133,15 +127,13 @@ class Command(BaseCommand):
 
         behave_args = []
         for option in unknown:
-            if '--behave' in option:
-                if len(option) == len('--behave-x'):
-                    # Strip behave prefix from short options
-                    behave_args.append(option.replace('--behave', ''))
-                else:
-                    # Strip behave prefix from long options
-                    behave_args.append(option.replace('behave-', ''))
-            else:
-                behave_args.append(option)
+            # Remove behave prefix
+            if option.startswith('--behave-'):
+                option = option.replace('--behave-', '')
+                prefix = '-' if len(option) == 1 else '--'
+                option = prefix + option
+
+            behave_args.append(option)
 
         return behave_args
 

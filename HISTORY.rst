@@ -8,6 +8,7 @@ master
 
 - Behave's short form arguments are now accepted (e.g. :code:`-i` for :code:`--include`)
 - Added :code:`--keepdb` short form argument, `-k`
+- Prefix conflicting command line options with :code:`--behave`
 
 **Bugfixes**
 
