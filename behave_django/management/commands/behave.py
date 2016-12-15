@@ -129,7 +129,7 @@ class Command(BaseCommand):
         for option in unknown:
             # Remove behave prefix
             if option.startswith('--behave-'):
-                option = option.replace('--behave-', '')
+                option = option.replace('--behave-', '', 1)
                 prefix = '-' if len(option) == 1 else '--'
                 option = prefix + option
 
