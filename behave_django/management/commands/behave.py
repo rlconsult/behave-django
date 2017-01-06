@@ -81,11 +81,9 @@ class Command(BaseCommand):
         """
         Add behave's and our command line arguments to the command
         """
-        usage = "%(prog)s [options] [ [DIR|FILE|FILE:LINE] ]+"
-        description = """\
+        parser.usage = "%(prog)s [options] [ [DIR|FILE|FILE:LINE] ]+"
+        parser.description = """\
         Run a number of feature tests with behave."""
-        parser.usage = usage
-        parser.description = description
 
         add_command_arguments(parser)
         add_behave_arguments(parser)
