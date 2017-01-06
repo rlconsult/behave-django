@@ -21,45 +21,57 @@ def add_command_arguments(parser):
         help="Don't create a test database. USE AT YOUR OWN RISK!",
     )
     parser.add_argument(
-        '--keepdb',
+        '-k', '--keepdb',
         action='store_true',
         default=False,
         help="Preserves the test DB between runs.",
     )
 
 
-def add_behave_arguments(parser):
+def add_behave_arguments(parser):  # noqa
     """
     Additional command line arguments extracted directly from behave
     """
 
+    # Option strings that conflict with Django
     conflicts = [
         '--no-color',
-        '--version'
+        '--version',
+        '-c',
+        '-k',
+        '-v',
     ]
 
-    for fixed, keywords in behave_options:
-        # TODO: accept short options too
-        keywords = keywords.copy()
-        long_option = None
-        for option in fixed:
-            if option.startswith("--"):
-                long_option = option
-                break
+    parser.add_argument(
+        'paths',
+        action='store',
+        nargs='*',
+        help="Feature directory, file or file location (FILE:LINE)."
+    )
 
-        # Do not add conflicting options
-        if long_option in conflicts:
+    for fixed, keywords in behave_options:
+        keywords = keywords.copy()
+
+        # Configfile only entries are ignored
+        if not fixed:
             continue
 
-        if long_option:
-            # type isn't a valid keyword for make_option
-            if hasattr(keywords.get('type'), '__call__'):
-                del keywords['type']
-            # config_help isn't a valid keyword for make_option
-            if 'config_help' in keywords:
-                del keywords['config_help']
+        # Build option strings
+        option_strings = []
+        for option in fixed:
+            # Prefix conflicting option strings with `--behave`
+            if option in conflicts:
+                prefix = '--' if option.startswith('--') else '-'
+                option = option.replace(prefix, '--behave-', 1)
 
-            parser.add_argument(long_option, **keywords)
+            option_strings.append(option)
+
+        # config_help isn't a valid keyword for add_argument
+        if 'config_help' in keywords:
+            keywords['help'] = keywords['config_help']
+            del keywords['config_help']
+
+        parser.add_argument(*option_strings, **keywords)
 
 
 class Command(BaseCommand):
@@ -69,6 +81,10 @@ class Command(BaseCommand):
         """
         Add behave's and our command line arguments to the command
         """
+        parser.usage = "%(prog)s [options] [ [DIR|FILE|FILE:LINE] ]+"
+        parser.description = """\
+        Run a number of feature tests with behave."""
+
         add_command_arguments(parser)
         add_behave_arguments(parser)
 
@@ -106,7 +122,18 @@ class Command(BaseCommand):
         """
         parser = BehaveArgsHelper().create_parser('manage.py', 'behave')
         args, unknown = parser.parse_known_args(argv[2:])
-        return unknown
+
+        behave_args = []
+        for option in unknown:
+            # Remove behave prefix
+            if option.startswith('--behave-'):
+                option = option.replace('--behave-', '', 1)
+                prefix = '-' if len(option) == 1 else '--'
+                option = prefix + option
+
+            behave_args.append(option)
+
+        return behave_args
 
 
 class BehaveArgsHelper(Command):

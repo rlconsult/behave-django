@@ -23,6 +23,8 @@ class TestCommandLine(DjangoSetupMixin):
         assert exit_status == 0
         assert (
             os.linesep + '  --use-existing-database' + os.linesep) in output
+        assert (
+            os.linesep + '  -k, --keepdb') in output
 
     def test_should_accept_behave_arguments(self):
         from behave_django.management.commands.behave import Command
@@ -31,10 +33,13 @@ class TestCommandLine(DjangoSetupMixin):
             argv=['manage.py', 'behave',
                   '--format', 'progress',
                   '--settings', 'test_project.settings',
+                  '-i', 'some-pattern',
                   'features/running-tests.feature'])
 
         assert '--format' in args
         assert 'progress' in args
+        assert '-i' in args
+        assert 'some-pattern' in args
 
     def test_should_not_include_non_behave_arguments(self):
         from behave_django.management.commands.behave import Command
@@ -67,6 +72,11 @@ class TestCommandLine(DjangoSetupMixin):
 
         assert args == []
 
+    def test_positional_args_should_work(self):
+        exit_status, output = run_silently(
+            'python manage.py behave features/running-tests.feature')
+        assert exit_status == 0
+
     def test_command_import_dont_patch_behave_options(self):
         # We reload the tested imports because they
         # could have been imported by previous tests.
@@ -81,3 +91,11 @@ class TestCommandLine(DjangoSetupMixin):
         reload(behave_django.management.commands.behave)
 
         assert behave.configuration.options == behave_options_backup
+
+    def test_conflicting_options_should_get_prefixed(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave', '--behave-k', '--behave-version'])
+
+        assert args == ['-k', '--version']
