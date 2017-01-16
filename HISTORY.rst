@@ -1,8 +1,8 @@
 Release History
 ---------------
 
-master
-++++++
+0.4.1 (2017-01-16)
+++++++++++++++++++
 
 **Features and Improvements**
 
