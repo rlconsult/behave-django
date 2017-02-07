@@ -38,7 +38,7 @@ that release for Django 1.7.x and below.  There is no technical disadvantage.
 Documentation
 -------------
 
--  Documentation is available from `pythonhosted.org/behave-django`_
+-  Documentation is available from `behave-django.readthedocs.io`_
 -  Read more about ``behave`` at `behave.readthedocs.io`_
 
 .. contribute-marker
@@ -53,9 +53,9 @@ Please, read the `contributing guide`_ in the docs.
 
 .. _version 0.3.0: https://pypi.python.org/pypi/behave-django/0.3.0
 .. _behave: https://pypi.python.org/pypi/behave
-.. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
+.. _behave-django.readthedocs.io: https://behave-django.readthedocs.io/en/latest/
 .. _behave.readthedocs.io: https://behave.readthedocs.io/en/latest/django.html
-.. _contributing guide: https://pythonhosted.org/behave-django/contribute.html
+.. _contributing guide: https://behave-django.readthedocs.io/en/latest/contribute.html
 .. |latest-version| image:: https://img.shields.io/pypi/v/behave-django.svg
     :target: https://pypi.python.org/pypi/behave-django/
     :alt: Latest version

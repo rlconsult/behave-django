@@ -59,7 +59,7 @@ Release History
 **Features and Improvements**
 
 - Integration with :code:`behave` is now done via monkey patching. Including the :code:`environment.before_scenario()` and :code:`environment.after_scenario()` function calls in your :code:`environment.py` file is no longer needed.
-- A new CLI option, :code:`--use-existing-database`, has been added. See the `usage docs <https://pythonhosted.org/behave-django/usage.html#behave-command-line-options>`__.
+- A new CLI option, :code:`--use-existing-database`, has been added. See the `usage docs <https://behave-django.readthedocs.io/en/latest/usage.html#command-line-options>`__.
 
 **Bugfixes**
 
