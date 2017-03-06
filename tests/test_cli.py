@@ -25,6 +25,8 @@ class TestCommandLine(DjangoSetupMixin):
             os.linesep + '  --use-existing-database' + os.linesep) in output
         assert (
             os.linesep + '  -k, --keepdb') in output
+        assert (
+            os.linesep + '  -S, --simple') in output
 
     def test_should_accept_behave_arguments(self):
         from behave_django.management.commands.behave import Command

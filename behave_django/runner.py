@@ -2,7 +2,8 @@ from django.test.runner import DiscoverRunner
 
 from behave_django.environment import BehaveHooksMixin
 from behave_django.testcase import (BehaviorDrivenTestCase,
-                                    ExistingDatabaseTestCase)
+                                    ExistingDatabaseTestCase,
+                                    DjangoSimpleTestCase)
 
 
 class BehaviorDrivenTestRunner(DiscoverRunner, BehaveHooksMixin):
@@ -27,3 +28,11 @@ class ExistingDatabaseTestRunner(DiscoverRunner, BehaveHooksMixin):
 
     def teardown_databases(self, old_config, **kwargs):
         pass
+
+
+class SimpleTestRunner(DiscoverRunner, BehaveHooksMixin):
+    """
+    Test runner that uses DjangoSimpleTestCase with atomic
+    transaction management and no support of web browser automation.
+    """
+    testcase_class = DjangoSimpleTestCase
