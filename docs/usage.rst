@@ -48,6 +48,20 @@ testing client.
         # save response in context for next step
         context.response = context.test.client.get(url)
 
+
+Simple testing
+--------------
+
+If you only use Django's testing client then behave tests can run
+much quicker with the ``--simple`` command line option. In this case
+transaction rollback is used for test automation instead of flushing
+the database after each scenario, just like in Django's standard
+``TestCase``.
+
+No HTTP server is started during the simple testing, so you can't
+use web browser automation. Accessing ``context.base_url``
+or calling ``context.get_url()`` will raise an exception.
+
 unittest + Django assert library
 --------------------------------
 
@@ -161,6 +175,14 @@ to facilitate faster testing by using the existing database instead of
 recreating it each time you run the test. This flag enables
 ``manage.py behave --keepdb`` to take advantage of that feature.
 |keepdb docs|_.
+
+``--simple``
+************
+
+Use Django's simple ``TestCase`` which rolls back the database transaction after
+each scenario instead of flushing the entire database. Tests run much quicker,
+however HTTP server is not started and therefore web browser automation is
+not available.
 
 Behave configuration file
 -------------------------
