@@ -166,8 +166,9 @@ Behave configuration file
 -------------------------
 
 You can use behave’s configuration file.  Just create a ``behave.ini``,
-``.behaverc``, or ``setup.cfg`` file in your project’s root directory and
-behave will pick it up.  You can read more about it in the `behave docs`_.
+``.behaverc``, ``setup.cfg`` or ``tox.ini`` file in your project’s root
+directory and behave will pick it up.  You can read more about it in the
+`behave docs`_.
 
 For example, if you want to have your features directory somewhere else.
 In your .behaverc file, you can put
