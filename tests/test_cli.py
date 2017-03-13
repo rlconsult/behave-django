@@ -12,7 +12,7 @@ def run_silently(command):
         command_args, stdout=PIPE, stderr=PIPE, stdin=PIPE)
     stdout, stderr = process.communicate()
     output = (stdout.decode('UTF-8') + os.linesep +
-              stderr.decode('UTF-8')).strip()
+              stderr.decode('UTF-8')).strip() + os.linesep
     return process.returncode, output
 
 
@@ -101,3 +101,15 @@ class TestCommandLine(DjangoSetupMixin):
             argv=['manage.py', 'behave', '--behave-k', '--behave-version'])
 
         assert args == ['-k', '--version']
+
+    def test_simple_and_use_existing_database_flags_raise_a_warning(self):
+        exit_status, output = run_silently(
+            'python manage.py behave'
+            '    --simple --use-existing-database --tags=@skip-all'
+        )
+        assert exit_status == 0
+        assert (
+            os.linesep +
+            '--simple flag has no effect ' +
+            'together with --use-existing-database' +
+            os.linesep) in output

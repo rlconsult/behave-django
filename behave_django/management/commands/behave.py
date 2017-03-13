@@ -100,6 +100,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        # Check the flags
+        if options['use_existing_database'] and options['simple']:
+            self.stderr.write(self.style.WARNING(
+                '--simple flag has no effect'
+                ' together with --use-existing-database'
+            ))
+
         # Configure django environment
         if options['dry_run'] or options['use_existing_database']:
             django_test_runner = ExistingDatabaseTestRunner()
