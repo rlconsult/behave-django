@@ -6,7 +6,6 @@ except ImportError:
 from .util import DjangoSetupMixin
 from behave_django.runner import SimpleTestRunner
 from behave.runner import Context, Runner
-from django.core.exceptions import ImproperlyConfigured
 from django.test.testcases import TestCase
 import pytest
 
@@ -32,12 +31,12 @@ class TestSimpleTestCase(DjangoSetupMixin):
         runner = Runner(mock.MagicMock())
         runner.context = Context(runner)
         SimpleTestRunner().before_scenario(runner.context)
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(AssertionError):
             assert runner.context.base_url == 'should raise an exception!'
 
     def test_simple_testcase_fails_when_calling_get_url(self):
         runner = Runner(mock.MagicMock())
         runner.context = Context(runner)
         SimpleTestRunner().before_scenario(runner.context)
-        with pytest.raises(ImproperlyConfigured):
+        with pytest.raises(AssertionError):
             runner.context.get_url()

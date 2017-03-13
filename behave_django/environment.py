@@ -1,22 +1,17 @@
 from behave.runner import ModelRunner, Context
 from django.core.management import call_command
 from django.shortcuts import resolve_url
-from django.core.exceptions import ImproperlyConfigured
 
 
 class PatchedContext(Context):
 
     @property
     def base_url(self):
-
-        if hasattr(self.test, 'live_server_url'):
-            return self.test.live_server_url
-
-        raise ImproperlyConfigured(
+        assert hasattr(self.test, 'live_server_url'), (
             'Web browser automation is not available.'
             ' This scenario step can not be run'
-            ' with the --simple or -S flag.'
-        )
+            ' with the --simple or -S flag.')
+        return self.test.live_server_url
 
     def get_url(self, to=None, *args, **kwargs):
         return self.base_url + (
