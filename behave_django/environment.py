@@ -1,6 +1,21 @@
-from behave.runner import ModelRunner
+from behave.runner import ModelRunner, Context
 from django.core.management import call_command
 from django.shortcuts import resolve_url
+
+
+class PatchedContext(Context):
+
+    @property
+    def base_url(self):
+        assert hasattr(self.test, 'live_server_url'), (
+            'Web browser automation is not available.'
+            ' This scenario step can not be run'
+            ' with the --simple or -S flag.')
+        return self.test.live_server_url
+
+    def get_url(self, to=None, *args, **kwargs):
+        return self.base_url + (
+            resolve_url(to, *args, **kwargs) if to else '')
 
 
 class BehaveHooksMixin(object):
@@ -17,17 +32,14 @@ class BehaveHooksMixin(object):
 
         Sets up the test case, base_url, and the get_url() utility function.
         """
+        context.__class__ = PatchedContext
+        # Simply setting __class__ directly doesn't work
+        # because behave.runner.Context.__setattr__ is implemented wrongly.
+        object.__setattr__(context, '__class__', PatchedContext)
+
         context.test = self.testcase_class()
         context.test.setUpClass()
         context.test()
-
-        context.base_url = context.test.live_server_url
-
-        def get_url(to=None, *args, **kwargs):
-            return context.base_url + (
-                resolve_url(to, *args, **kwargs) if to else '')
-
-        context.get_url = get_url
 
     def load_fixtures(self, context):
         """

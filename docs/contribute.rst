@@ -17,11 +17,13 @@ Install the dev dependencies
     $ pip install -r requirements-dev.txt
 
 Make sure the tests pass.  The ``@failing`` tag is used for tests that are
-supposed to fail.
+supposed to fail. The ``@requires-live-http`` tag is used for tests that can't run
+with ``--simple`` flag.
 
 .. code:: bash
 
     $ python manage.py behave --tags=~@failing  # skip failing tests
+    $ python manage.py behave --simple --tags=~@failing --tags=~@requires-live-http
     $ py.test
 
 Start your topic branch

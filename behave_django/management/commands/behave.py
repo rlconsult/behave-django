@@ -7,7 +7,8 @@ from django.core.management.base import BaseCommand
 
 from behave_django.environment import monkey_patch_behave
 from behave_django.runner import (BehaviorDrivenTestRunner,
-                                  ExistingDatabaseTestRunner)
+                                  ExistingDatabaseTestRunner,
+                                  SimpleTestRunner)
 
 
 def add_command_arguments(parser):
@@ -26,6 +27,13 @@ def add_command_arguments(parser):
         default=False,
         help="Preserves the test DB between runs.",
     )
+    parser.add_argument(
+        '-S', '--simple',
+        action='store_true',
+        default=False,
+        help="Use simple test runner that supports Django's"
+        " testing client only (no web browser automation)"
+    )
 
 
 def add_behave_arguments(parser):  # noqa
@@ -40,6 +48,8 @@ def add_behave_arguments(parser):  # noqa
         '-c',
         '-k',
         '-v',
+        '-S',
+        '--simple',
     ]
 
     parser.add_argument(
@@ -90,9 +100,18 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        # Check the flags
+        if options['use_existing_database'] and options['simple']:
+            self.stderr.write(self.style.WARNING(
+                '--simple flag has no effect'
+                ' together with --use-existing-database'
+            ))
+
         # Configure django environment
         if options['dry_run'] or options['use_existing_database']:
             django_test_runner = ExistingDatabaseTestRunner()
+        elif options['simple']:
+            django_test_runner = SimpleTestRunner()
         else:
             django_test_runner = BehaviorDrivenTestRunner()
 

@@ -1,3 +1,4 @@
+@requires-live-http
 Feature: URL helpers are available in behave's context
     In order to ensure that url helpers are available as documented
     As the Maintainer
