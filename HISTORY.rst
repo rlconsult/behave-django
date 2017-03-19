@@ -1,6 +1,14 @@
 Release History
 ---------------
 
+0.5.0 (2017-03-19)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- Added :code:`--simple` command line option to run tests using the regular :code:`TestCase` class instead of :code:`StaticLiveServerTestCase`
+
+
 0.4.1 (2017-01-16)
 ++++++++++++++++++
 
