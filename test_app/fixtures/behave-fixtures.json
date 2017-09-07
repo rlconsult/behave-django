@@ -3,6 +3,5 @@
         "name": "fixture loading test",
         "number": 42
     },
-    "model": "test_app.behavetestmodel",
-    "pk": 1
+    "model": "test_app.behavetestmodel"
 }]

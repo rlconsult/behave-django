@@ -1,5 +1,4 @@
 from behave.runner import ModelRunner, Context
-from django.core.management import call_command
 from django.shortcuts import resolve_url
 
 
@@ -26,36 +25,41 @@ class BehaveHooksMixin(object):
     """
     testcase_class = None
 
-    def before_scenario(self, context):
+    def patch_context(self, context):
         """
-        Method that runs before behave's before_scenario function
+        Patches the context to add utility functions
 
-        Sets up the test case, base_url, and the get_url() utility function.
+        Sets up the base_url, and the get_url() utility function.
         """
         context.__class__ = PatchedContext
         # Simply setting __class__ directly doesn't work
         # because behave.runner.Context.__setattr__ is implemented wrongly.
         object.__setattr__(context, '__class__', PatchedContext)
 
+    def before_scenario(self, context):
+        """
+        Method that runs immediately before behave's before_scenario function
+
+        Sets up the test case.
+        """
         context.test = self.testcase_class()
+
+        if getattr(context, 'fixtures', None):
+            context.test.fixtures = context.fixtures
+
+        if getattr(context, 'reset_sequences', None):
+            context.test.reset_sequences = context.reset_sequences
+
+        context.test._pre_setup(run=True)
         context.test.setUpClass()
         context.test()
-
-    def load_fixtures(self, context):
-        """
-        Method that runs immediately after behave's before_scenario function
-
-        If fixtures are found in context, loads the fixtures using the loaddata
-        management command.
-        """
-        if getattr(context, 'fixtures', None):
-            call_command('loaddata', *context.fixtures, verbosity=0)
 
     def after_scenario(self, context):
         """
         Method that runs immediately after behave's after_scenario function
         """
         context.test.tearDownClass()
+        context.test._post_teardown(run=True)
         del context.test
 
 
@@ -66,11 +70,14 @@ def monkey_patch_behave(django_test_runner):
     behave_run_hook = ModelRunner.run_hook
 
     def run_hook(self, name, context, *args):
+        if name == 'before_all':
+            django_test_runner.patch_context(context)
+
+        behave_run_hook(self, name, context, *args)
+
         if name == 'before_scenario':
             django_test_runner.before_scenario(context)
-        behave_run_hook(self, name, context, *args)
-        if name == 'before_scenario':
-            django_test_runner.load_fixtures(context)
+
         if name == 'after_scenario':
             django_test_runner.after_scenario(context)
 

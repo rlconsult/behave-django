@@ -3,6 +3,5 @@
         "name": "second fixture",
         "number": 7
     },
-    "model": "test_app.behavetestmodel",
-    "pk": 2
+    "model": "test_app.behavetestmodel"
 }]

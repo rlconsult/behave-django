@@ -1,3 +1,4 @@
+@requires-live-http
 Feature: Fixture loading
     In order to have sample data during my behave tests
     As the Maintainer
@@ -8,3 +9,7 @@ Feature: Fixture loading
 
     Scenario: Load fixtures for this scenario and feature
         Then the fixture for the second scenario should be loaded
+
+    @failing
+    Scenario: Load fixtures then reset sequences
+        Then the sequences should be reset
