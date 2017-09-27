@@ -1,7 +1,7 @@
 Contributing
 ============
 
-Want to help out with behave-django?  Cool!  Here's a quick guide to do just
+Want to help out with *behave-django*?  Cool!  Here's a quick guide to do just
 that.
 
 Fork, then clone the repo:
@@ -39,16 +39,16 @@ Make your changes.  Add tests for your change.  Make the tests pass:
     $ python manage.py behave --tags=~@failing
     $ py.test
 
-Finally, make sure your tests pass on all the configurations behave-django
-supports. We use tox for this.  The Python versions you test against need to
+Finally, make sure your tests pass on all the configurations *behave-django*
+supports.  We use tox for this.  The Python versions you test against need to
 be available in your PATH.
 
 .. code:: bash
 
     $ tox
 
-You can choose not to run the tox tests, but make sure your tests pass in the
-CI server when you push your PR.
+You can choose not to run all tox tests and let the CI server take care about that.
+In this case make sure your tests pass when you push your changes and open the PR.
 
 Your tests don't have to be behave tests. ``:-)``
 
@@ -57,7 +57,7 @@ Push to your fork and `submit a pull request`_.
 Other things to note:
 
 - Write tests.
-- We're using PEP8 as our code style guide (``flake8`` with run over the code
+- We're using PEP8 as our code style guide (``flake8`` will run over the code
   on the CI server).
 
 Thank you!
