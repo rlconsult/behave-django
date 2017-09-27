@@ -12,6 +12,9 @@ env:  # $ tox -l | sort | xargs -I _ echo '  - TOXENV=_'
   - TOXENV=py35-django110
   - TOXENV=py35-django111
   - TOXENV=py36-django111
+before_install:
+  # work around https://github.com/travis-ci/travis-ci/issues/8363
+  - pyenv global system 3.5
 install:
   - pip install tox
 script: tox
