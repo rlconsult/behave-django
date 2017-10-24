@@ -1,12 +1,13 @@
 Release History
 ---------------
 
-x.x.x (2017-xx-xx)
+1.0.0 (2017-10-25)
 ++++++++++++++++++
 
 **Features and Improvements**
 
 - Added decorator to load fixtures
+- Updated django integration logic
 
 
 0.5.0 (2017-03-19)
