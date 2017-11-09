@@ -36,9 +36,8 @@ Examples:
 Django’s testing client
 -----------------------
 
-Attached to the context is an instance of TestCase.  You can access it
-via ``context.test``.  This means you can do things like use Django’s
-testing client.
+Internally, Django's TestCase is used to maintain the test environment. You can
+access the TestCase instance via ``context.test``.
 
 .. code-block:: python
 
@@ -47,7 +46,6 @@ testing client.
     def visit(context, url):
         # save response in context for next step
         context.response = context.test.client.get(url)
-
 
 Simple testing
 --------------
@@ -90,18 +88,35 @@ regular TestCases.  So you can do something like:
 
 And you don’t have to clean the database yourself.
 
-If you have `factories`_ you want to instantiate on a per-scenario basis,
-you can initialize them in ``environment.py`` like this:
+django_ready hook
+-----------------
+
+You can add a ``django_ready`` function in your ``environment.py`` file in case
+you want to make per-scenario changes inside a transaction.
+
+For example, if you have `factories`_ you want to instantiate on a per-scenario
+basis, you can initialize them in ``environment.py`` like this:
 
 .. code-block:: python
 
     from myapp.main.tests.factories import UserFactory, RandomContentFactory
 
 
-    def before_scenario(context, scenario):
+    def django_ready(context, scenario):
+        # This function is run inside the transaction
         UserFactory(username='user1')
         UserFactory(username='user2')
         RandomContentFactory()
+
+Or maybe you want to modify the ``test`` instance:
+
+.. code-block:: python
+
+    from rest_framework.test import APIClient
+
+
+    def django_ready(context, scenario):
+        context.test.client = APIClient()
 
 Fixture loading
 ---------------
@@ -110,7 +125,7 @@ behave-django can load your fixtures for you per feature/scenario. There are
 two approaches to this:
 
 * loading the fixtures in ``environment.py``, or
-* using a decorator on your step method
+* using a decorator on your step function
 
 
 Fixtures in environment.py
@@ -145,8 +160,8 @@ You could also have fixtures per Feature too
             # This works because behave will use the same context for
             # everything below Feature. (Scenarios, Outlines, Backgrounds)
 
-Of course, since ``context.fixtures`` is really just a list, you can
-mutate it however you want, it will only be processed upon leaving the
+Of course, since ``context.fixtures`` is really just a list, you can mutate it
+however you want, it will only be processed upon leaving the
 ``before_scenario()`` function of your ``environment.py`` file.
 
 .. note::
@@ -160,7 +175,7 @@ mutate it however you want, it will only be processed upon leaving the
 Fixtures using a decorator
 **************************
 
-You can define `Django fixtures`_ using a method decorator. The decorator will
+You can define `Django fixtures`_ using a function decorator. The decorator will
 load the fixtures in the ``before_scenario``, as documented above. It is merely
 a convenient way to keep fixtures close to your steps.
 

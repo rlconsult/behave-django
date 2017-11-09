@@ -1,6 +1,14 @@
 Release History
 ---------------
 
+Unreleased
+++++++++++
+
+**Features and Improvements**
+
+- Added :code:`django_ready` hook for running setup code within the django environment
+
+
 1.0.0 (2017-10-25)
 ++++++++++++++++++
 

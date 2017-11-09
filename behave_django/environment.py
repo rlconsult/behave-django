@@ -18,6 +18,18 @@ class PatchedContext(Context):
             resolve_url(to, *args, **kwargs) if to else '')
 
 
+def load_registered_fixtures(context):
+    """
+    Apply fixtures that are registered with the @fixtures decorator.
+    """
+    for step in context.scenario.all_steps:
+        match = step_registry.registry.find_match(step)
+        if match and hasattr(match.func, 'registered_fixtures'):
+            if not context.test.fixtures:
+                context.test.fixtures = []
+            context.test.fixtures.extend(match.func.registered_fixtures)
+
+
 class BehaveHooksMixin(object):
     """
     Provides methods that run during test execution
@@ -37,14 +49,16 @@ class BehaveHooksMixin(object):
         # because behave.runner.Context.__setattr__ is implemented wrongly.
         object.__setattr__(context, '__class__', PatchedContext)
 
-    def before_scenario(self, context):
+    def setup_testclass(self, context):
         """
-        Method that runs immediately before behave's before_scenario function
-
-        Sets up the test case.
+        Adds the test instance to context
         """
         context.test = self.testcase_class()
 
+    def setup_fixtures(self, context):
+        """
+        Sets up fixtures
+        """
         if getattr(context, 'fixtures', None):
             context.test.fixtures = context.fixtures
 
@@ -52,30 +66,26 @@ class BehaveHooksMixin(object):
             context.test.reset_sequences = context.reset_sequences
 
         if hasattr(context, 'scenario'):
-            self.load_registered_fixtures(context=context)
+            load_registered_fixtures(context)
 
+    def setup_test(self, context):
+        """
+        Sets up the Django test
+
+        This method runs the code necessary to create the test database, start
+        the live server, etc.
+        """
         context.test._pre_setup(run=True)
         context.test.setUpClass()
         context.test()
 
-    def after_scenario(self, context):
+    def teardown_test(self, context):
         """
-        Method that runs immediately after behave's after_scenario function
+        Tears down the Django test
         """
         context.test.tearDownClass()
         context.test._post_teardown(run=True)
         del context.test
-
-    def load_registered_fixtures(self, context):
-        """
-        Apply fixtures that are registered with the @fixtures decorator.
-        """
-        for step in context.scenario.all_steps:
-            match = step_registry.registry.find_match(step)
-            if match and hasattr(match.func, 'registered_fixtures'):
-                if not context.test.fixtures:
-                    context.test.fixtures = []
-                context.test.fixtures.extend(match.func.registered_fixtures)
 
 
 def monkey_patch_behave(django_test_runner):
@@ -91,9 +101,12 @@ def monkey_patch_behave(django_test_runner):
         behave_run_hook(self, name, context, *args)
 
         if name == 'before_scenario':
-            django_test_runner.before_scenario(context)
+            django_test_runner.setup_testclass(context)
+            django_test_runner.setup_fixtures(context)
+            django_test_runner.setup_test(context)
+            behave_run_hook(self, 'django_ready', context)
 
         if name == 'after_scenario':
-            django_test_runner.after_scenario(context)
+            django_test_runner.teardown_test(context)
 
     ModelRunner.run_hook = run_hook

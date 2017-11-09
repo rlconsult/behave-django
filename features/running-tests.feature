@@ -7,3 +7,7 @@ Feature: Running tests
         Given this step exists
         When I run "python manage.py behave"
         Then I should see the behave tests run
+
+    Scenario: Test django_ready
+        When I run "python manage.py behave"
+        Then django_ready should be called
