@@ -19,7 +19,7 @@ setup(
     packages=find_packages(exclude=['test*']),
     include_package_data=True,
     license=behave_django.__license__,
-    description=behave_django.__doc__,
+    description=behave_django.__doc__.strip(),
     long_description=read_file('README.rst'),
     url='https://github.com/behave/behave-django',
     author='Mitchel Cabuloy',
