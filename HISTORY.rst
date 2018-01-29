@@ -1,7 +1,7 @@
 Release History
 ---------------
 
-Unreleased
+1.1.0 (2017-01-29)
 ++++++++++
 
 **Features and Improvements**
