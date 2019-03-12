@@ -1,21 +1,25 @@
 Release History
 ---------------
 
-1.2.0 (2018-03-09)
-++++++++++
+1.2.0 (2018-03-12)
+++++++++++++++++++
 
 **Features and Improvements**
 
-- Added option to set multi_db on TestCase
+- Added option to set `multi_db`_ on TestCase
 
+**Bugfixes**
+
+- Made fixtures decorator compatible with newly released behave
+
+.. _multi_db: https://docs.djangoproject.com/en/stable/topics/testing/tools/#testing-multi-db
 
 1.1.0 (2017-01-29)
-++++++++++
+++++++++++++++++++
 
 **Features and Improvements**
 
 - Added :code:`django_ready` hook for running setup code within the django environment
-
 
 1.0.0 (2017-10-25)
 ++++++++++++++++++
@@ -25,14 +29,13 @@ Release History
 - Added decorator to load fixtures
 - Updated django integration logic
 
-
 0.5.0 (2017-03-19)
 ++++++++++++++++++
 
 **Features and Improvements**
 
-- Added :code:`--simple` command line option to run tests using the regular :code:`TestCase` class instead of :code:`StaticLiveServerTestCase`
-
+- Added :code:`--simple` command line option to run tests using the
+  regular :code:`TestCase` class instead of :code:`StaticLiveServerTestCase`
 
 0.4.1 (2017-01-16)
 ++++++++++++++++++
@@ -47,7 +50,6 @@ Release History
 
 - Fixed specifying paths didn't work
 
-
 0.4.0 (2016-08-23)
 ++++++++++++++++++
 
@@ -56,13 +58,13 @@ Release History
 - Replace `optparse` with `argparse`
 - Support Django 1.8 + 1.9 + 1.10
 
-
 0.3.0 (2015-10-27)
 ++++++++++++++++++
 
 **Features and Improvements**
 
-- Added the :code:`--keepdb` flag to reuse the existing test database instead of recreating it for every test run. (Django >= 1.8 only)
+- Added the :code:`--keepdb` flag to reuse the existing test database
+  instead of recreating it for every test run. (Django >= 1.8 only)
 - Overhaul tests to use Tox and pytest for a better testing experience.
 
 0.2.3 (2015-08-21)
@@ -91,19 +93,26 @@ Release History
 
 **Features and Improvements**
 
-- Integration with :code:`behave` is now done via monkey patching. Including the :code:`environment.before_scenario()` and :code:`environment.after_scenario()` function calls in your :code:`environment.py` file is no longer needed.
-- A new CLI option, :code:`--use-existing-database`, has been added. See the `usage docs <https://behave-django.readthedocs.io/en/latest/usage.html#command-line-options>`__.
+- Integration with :code:`behave` is now done via monkey patching.
+  Including the :code:`environment.before_scenario()` and
+  :code:`environment.after_scenario()` function calls in your
+  :code:`environment.py` file is no longer needed.
+- A new CLI option, :code:`--use-existing-database`, has been added.
+  See the `usage docs
+  <https://behave-django.readthedocs.io/en/latest/usage.html#command-line-options>`__.
 
 **Bugfixes**
 
-- Calling :code:`python manage.py behave --dry-run` does not create a test database any longer.
+- Calling :code:`python manage.py behave --dry-run` does not create a
+  test database any longer.
 
 0.1.4 (2015-06-08)
 ++++++++++++++++++
 
 **Features and Improvements**
 
-- :code:`context.get_url()`. URL helper attached to context with built-in reverse resolution as a handy shortcut.
+- :code:`context.get_url()`. URL helper attached to context with built-in
+  reverse resolution as a handy shortcut.
 
 0.1.3 (2015-05-13)
 ++++++++++++++++++
@@ -122,7 +131,10 @@ Release History
 
 **Features and Improvements**
 
-- You can now have a :code:`.behaverc` in your project's root directory. You can specify where your feature directories are in this file, among other things. See the `behave docs on configuration files <https://pythonhosted.org/behave/behave.html#configuration-files>`__.
+- You can now have a :code:`.behaverc` in your project's root directory.
+  You can specify where your feature directories are in this file, among
+  other things. See the `behave docs on configuration files
+  <https://pythonhosted.org/behave/behave.html#configuration-files>`__.
 - Removed :code:`BEHAVE\_FEATURES` setting in favor of using behave's configuration file
 
 0.1.1 (2015-04-04)
