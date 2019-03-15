@@ -69,7 +69,7 @@ Please, read the `contributing guide`_ in the docs.
     :target: https://github.com/behave/behave-django/blob/master/LICENSE
     :alt: Software license
 .. |docs-status| image:: https://img.shields.io/readthedocs/behave-django/stable.svg
-    :target: https://behave-django.readthedocs.io/en/stable/
+    :target: https://readthedocs.org/projects/behave-django/
     :alt: Documentation Status
 .. |gitter| image:: https://img.shields.io/gitter/room/behave/behave-django.svg
     :alt: Gitter chat room
