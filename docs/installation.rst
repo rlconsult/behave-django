@@ -52,8 +52,8 @@ details of this very example.  See the folder also for `more useful examples`_.
    The `behave docs`_ provide additional helpful information on using *behave*
    with Django and various test automation libraries.
 
-.. _environment.py: https://github.com/behave/behave-django/blob/master/features/environment.py
-.. _running-tests.feature: https://github.com/behave/behave-django/blob/master/features/running-tests.feature
-.. _steps/running_tests.py: https://github.com/behave/behave-django/blob/master/features/steps/running_tests.py
-.. _more useful examples: https://github.com/behave/behave-django/tree/master/features
+.. _environment.py: https://github.com/behave/behave-django/blob/master/tests/acceptance/environment.py
+.. _running-tests.feature: https://github.com/behave/behave-django/blob/master/tests/acceptance/features/running-tests.feature
+.. _more useful examples: https://github.com/behave/behave-django/tree/master/tests/acceptance/features
+.. _steps/running_tests.py: https://github.com/behave/behave-django/blob/master/tests/acceptance/steps/running_tests.py
 .. _behave docs: https://behave.readthedocs.io/en/latest/practical_tips.html

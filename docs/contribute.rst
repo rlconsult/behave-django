@@ -70,7 +70,7 @@ look at the results.  Sphinx builds the output in ``docs/_build/``.
 .. code:: console
 
     $ tox -e docs
-    $ python -m webbrowser -t file://$PWD/docs/_build/html/index.html
+    $ python -m webbrowser -t docs/_build/html/index.html
 
 Finally
 -------
