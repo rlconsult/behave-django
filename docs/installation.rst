@@ -11,10 +11,10 @@ Add ``behave_django`` to your ``INSTALLED_APPS``
 
 .. code-block:: python
 
-    INSTALLED_APPS += ('behave_django',)
+    INSTALLED_APPS += ['behave_django']
 
-Create the features directory in your project’s root directory. (Next to
-``manage.py``)
+Create the features directory in your project’s root directory. (Next
+to ``manage.py``)
 
 ::
 
