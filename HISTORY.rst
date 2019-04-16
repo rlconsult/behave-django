@@ -1,6 +1,20 @@
 Release History
 ---------------
 
+1.3.0 (2019-04-16)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- Add Bandit security linter to CI setup
+- Minor refactorings to please linters
+- Update and clarify documentation
+- Cover Django 2.2 with test matrix, remove Django 2.0 
+
+**Bugfixes**
+
+- Fix fixtures decorator behavior (reset between scenarios)
+
 1.2.0 (2018-03-12)
 ++++++++++++++++++
 
