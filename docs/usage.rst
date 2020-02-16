@@ -283,5 +283,5 @@ Behave should now look for your features in those folders.
 .. |keepdb docs| replace:: More information about ``--keepdb``
 .. _keepdb docs: https://docs.djangoproject.com/en/stable/topics/testing/overview/#the-test-database
 .. _using the ORM: https://docs.djangoproject.com/en/stable/topics/testing/tools/#fixture-loading
-.. _Django fixtures: https://docs.djangoproject.com/en/stable/howto/initial-data/#providing-initial-data-with-fixtures
+.. _Django fixtures: https://docs.djangoproject.com/en/stable/howto/initial-data/#providing-data-with-fixtures
 .. _Multiple database docs: https://docs.djangoproject.com/en/stable/topics/testing/tools/#multi-database-support
