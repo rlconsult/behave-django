@@ -10,9 +10,9 @@ Behave BDD integration for Django
 Features
 --------
 
-- Web Browser Automation ready
+- Web browser automation ready
 - Database transactions per scenario
-- Use Django's testing client
+- Use Django's test client
 - Use unittest + Django assert library
 - Use behave's command line arguments
 - Use behave's configuration file
@@ -50,12 +50,12 @@ Please, read the `contributing guide`_ in the docs.
 
 
 .. _tested against: https://travis-ci.org/behave/behave-django
-.. _behave: https://pypi.python.org/pypi/behave
+.. _behave: https://pypi.org/project/behave/
 .. _behave-django.readthedocs.io: https://behave-django.readthedocs.io/en/latest/
 .. _behave.readthedocs.io: https://behave.readthedocs.io/en/latest/usecase_django.html
 .. _contributing guide: https://behave-django.readthedocs.io/en/latest/contribute.html
 .. |latest-version| image:: https://img.shields.io/pypi/v/behave-django.svg
-    :target: https://pypi.python.org/pypi/behave-django/
+    :target: https://pypi.org/project/behave-django/
     :alt: Latest version
 .. |build-status| image:: https://img.shields.io/travis/behave/behave-django/master.svg
     :target: https://travis-ci.org/behave/behave-django
@@ -64,7 +64,7 @@ Please, read the `contributing guide`_ in the docs.
     :target: https://www.codacy.com/app/behave-contrib/behave-django
     :alt: Code health
 .. |python-support| image:: https://img.shields.io/pypi/pyversions/behave-django.svg
-    :target: https://pypi.python.org/pypi/behave-django
+    :target: https://pypi.org/project/behave-django/
     :alt: Python versions
 .. |license| image:: https://img.shields.io/pypi/l/behave-django.svg
     :target: https://github.com/behave/behave-django/blob/master/LICENSE
